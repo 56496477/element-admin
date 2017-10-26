@@ -23,10 +23,13 @@ export default {
     [types.SETCURRENTMENU](state, to){
         let _currentMenu = localStorage.currentMenu && JSON.parse(localStorage.currentMenu) || [];
         if(to){
-            _currentMenu.push({
-                name: to.name,
-                path: to.path
-            })
+            debugger
+            if(!_.some(_currentMenu, to)){
+                _currentMenu.push({
+                    name: to.name,
+                    path: to.path
+                })
+            }
             localStorage.currentName = to.name;
             state.currentName = to.name;
         }
@@ -37,7 +40,6 @@ export default {
         state.currentMenu = _.remove(state.currentMenu, (n) => {
             return n.name != name;
         })
-        console.log(state.currentMenu)
         localStorage.currentMenu = JSON.stringify(state.currentMenu);
     },
     [types.TOOGLECURRENTMENU](state, info){

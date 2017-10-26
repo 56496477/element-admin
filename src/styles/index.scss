@@ -14,7 +14,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #ddd;
 }
 
 .n-header {
@@ -80,16 +79,15 @@ body {
     border-right: 0;
 }
 .el-main{
-    background: #f0f0f0;
+    
     padding: 0;
 }
 
 .n-active-menu{
-    border-top: 1px solid #ddd;
-    border-bottom: 2px solid #ddd;
-    height: 35px;
+    background: #eee;
+    height: 36px;
     width: 100%;
-    line-height: 30px;
+    line-height: 33px;
     padding: 0 5px;
 }
 .el-tag{
