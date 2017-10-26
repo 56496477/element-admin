@@ -1,5 +1,6 @@
-import  * as types from './types';
+import  * as types from './types'
 import { routes } from '../router'
+import _ from 'lodash'
 
 export default {
     [types.UPDATEMENULIST](state){
@@ -14,7 +15,33 @@ export default {
             }
             menuList.push(item);
         })
-        console.log(menuList)
         state.menuList = menuList;
+    },
+    [types.UPDATECOLLAPSE](state){
+        state.collapse = !state.collapse;
+    },
+    [types.SETCURRENTMENU](state, to){
+        let _currentMenu = localStorage.currentMenu && JSON.parse(localStorage.currentMenu) || [];
+        if(to){
+            _currentMenu.push({
+                name: to.name,
+                path: to.path
+            })
+            localStorage.currentName = to.name;
+            state.currentName = to.name;
+        }
+        localStorage.currentMenu = JSON.stringify(_.uniqBy(_currentMenu, 'name'));
+        state.currentMenu = _.uniqBy(_currentMenu, 'name');
+    },
+    [types.DELETECURRENTMENU](state, name){
+        state.currentMenu = _.remove(state.currentMenu, (n) => {
+            return n.name != name;
+        })
+        console.log(state.currentMenu)
+        localStorage.currentMenu = JSON.stringify(state.currentMenu);
+    },
+    [types.TOOGLECURRENTMENU](state, info){
+        state.currentName = info.name;
+        localStorage.currentName = info.name;
     }
 }

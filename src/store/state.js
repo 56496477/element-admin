@@ -1,3 +1,6 @@
 export default {
-    menuList: []
+    menuList: [],
+    currentMenu: [],
+    currentName: '',
+    collapse: true
 }

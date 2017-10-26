@@ -1,112 +1,76 @@
 <template>
-  <el-container class="n-container">
-    <el-aside width="200px">
-      <div class="n-logo">
-        <div class="logo"></div>
-      </div>
-      <sidebarMenu :menuList="menuList"></sidebarMenu>
-    </el-aside>
-    <el-container class="n-main">
-      <el-header>
-        <div class="n-header">
-          <span class="el-icon-won-n-menu"></span>
-          <div class="menu">
-            <span>首页 /</span>
-            <span>组件</span>
-          </div>
-        </div>
-      </el-header>
-      <el-main>
-        <router-view></router-view>
-      </el-main>
-      <!-- <el-footer height="30px"></el-footer> -->
+    <el-container class="n-container">
+        <el-aside :width="collapse ? '200px' : '60px'">
+            <div class="n-logo" :style="{width: collapse ? '200px' : '60px'}">
+                <div class="logo" :style="{width: collapse ? '160px' : '45px'}"></div>
+            </div>
+            <sidebarMenu :menuList="menuList"></sidebarMenu>
+        </el-aside>
+        <el-container class="n-main" :style="{paddingLeft: collapse ? '200px' : '60px'}">
+            <el-header>
+                <div class="n-header">
+                    <span @click="toggleClick" class="el-icon-won-n-menu"></span>
+                    <div class="menu">
+                        <el-breadcrumb separator="/">
+                            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                            <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+                        </el-breadcrumb>
+                    </div>
+                </div>
+            </el-header>
+            <el-main>
+                <div class="n-active-menu">
+                    <el-tag size="medium" v-for="item in currentMenu" @close="tagClose(item)" @click.native="tagClick(item)" :class="[currentName == item.name ? 'el-tag-active' : '']" closable color="#fff">{{item.name}}</el-tag>
+                </div>
+                <div class="active-div">
+                    <router-view></router-view>
+                </div>
+            </el-main>
+            <!-- <el-footer height="30px"></el-footer> -->
+        </el-container>
     </el-container>
-  </el-container>
 </template>
 
 <script>
-  import sidebarMenu from './components/sidebarMenu.vue'
-  
-  export default {
-    components: {
-      sidebarMenu
-    },
-    data() {
-      return {};
-    },
-    computed: {
-      menuList(){
-        return this.$store.state.menuList;
-      }
-    },
-    methods: {
-      
-    }
-  };
+    import sidebarMenu from './components/sidebarMenu.vue'
+    export default {
+        components: {
+            sidebarMenu
+        },
+        data() {
+            return {};
+        },
+        computed: {
+            menuList() {
+                return this.$store.state.menuList;
+            },
+            collapse() {
+                return this.$store.state.collapse;
+            },
+            currentMenu() {
+                return this.$store.state.currentMenu;
+            },
+            currentName() {
+                return this.$store.state.currentName;
+            }
+        },
+        methods: {
+            toggleClick() {
+                this.$store.commit('UPDATECOLLAPSE');
+            },
+            tagClose(val) {
+                this.$store.commit('DELETECURRENTMENU', val.name);
+            },
+            tagClick(val) {
+                this.$store.commit('TOOGLECURRENTMENU', val);
+                this.$router.push({
+                    path: val.path
+                });
+            }
+        }
+    };
 </script>
 
 <style lang="scss">
-  .n-container {
-    height: 100%;
-    width: 100%;
-  }
-  .el-header{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-  }
-  .n-header{
-    width: 100%;
-    height: 30px;
-    line-height: 30px;
-    .el-icon-won-n-menu{
-      font-size: 15px;
-      cursor: pointer;
-      font-weight: 500;
-    }
-    .menu{
-      display: inline-block;
-      font-size: 15px;
-      margin-left: 15px;
-      color: #ababab;
-    }
-  }
-  .n-main {
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    transition: all 0.3s ease-in-out;
-    padding-left: 200px;
-  }
-  .el-aside {
-    background: rgb(73, 80, 96);
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    z-index: 9999;
-  }
-  .el-menu {
-    width: 200px;
-  }
-  .n-logo{
-    width: 200px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .logo{
-      height: 45px;
-      width: 160px;
-      text-align: center;
-      line-height: 45px;
-      background-color: #6db4ff;
-      border-radius: 5px;
-      color: #fff;
-      letter-spacing: 2px;
-      font-size: 15px;
-    }
-  }
+
 </style>

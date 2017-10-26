@@ -10,6 +10,7 @@ const mainRouter = [
         children: [
             { path: 'markdown', title: '富文本', icon: 'el-icon-edit-outline', name: 'markdown', component: resolve => { require(['./views/markdown.vue'], resolve); } },
             { path: 'images', title: '图片', icon: 'el-icon-picture-outline', name: 'images', component: resolve => { require(['./views/images.vue'], resolve); } },
+            { path: 'index', title: '首页', icon: 'el-icon-edit-outline', name: 'index', component: resolve => { require(['./views/home.vue'], resolve); } },
         ]
     },
     {
