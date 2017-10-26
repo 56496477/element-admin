@@ -1,2 +1,2 @@
-export const DEMO ='DEMO';
+export const UPDATEMENULIST ='UPDATEMENULIST';
 
