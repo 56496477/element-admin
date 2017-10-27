@@ -30,7 +30,7 @@ const mainRouter = [
         icon: 'el-icon-tickets',
         component: Main,
         children: [
-            { path: 'index', title: 'ele表格', name: 'table1', component: resolve => { require(['./views/table.vue'], resolve); } },
+            { path: 'index', title: '表格', name: 'table', component: resolve => { require(['./views/table.vue'], resolve); } },
         ]
     },
 ]

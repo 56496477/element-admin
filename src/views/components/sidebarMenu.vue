@@ -38,9 +38,9 @@
             }
         },
         watch: {
-            '$route' (to) {
-                localStorage.currentName = to.name;
-                this.$store.commit('SETCURRENTMENU',to);
+            '$route' (to, from) {
+                console.log(to)
+                this.$store.commit('UPDATECURRENTMENU',to);
             }
         },
     }

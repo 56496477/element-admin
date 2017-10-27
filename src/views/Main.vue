@@ -20,7 +20,7 @@
             </el-header>
             <el-main>
                 <div class="n-active-menu">
-                    <el-tag size="medium" v-for="item in currentMenu" @close="tagClose(item)" @click.native="tagClick(item)" :class="[currentName == item.name ? 'el-tag-active' : '']" closable color="#fff">{{item.name}}</el-tag>
+                    <el-tag size="medium" v-for="item in currentMenu" @close.stop="tagClose(item)" @click.native="tagClick(item)" :class="[currentName == item.name ? 'el-tag-active' : '']" :closable="item.name == 'index' ? false : true" color="#fff">{{item.title}}</el-tag>
                 </div>
                 <div class="active-div">
                     <router-view></router-view>
@@ -60,6 +60,11 @@
             },
             tagClose(val) {
                 this.$store.commit('DELETECURRENTMENU', val.name);
+                if(this.$store.state.currentName == 'index'){
+                    this.$router.push({
+                    path: '/index'
+                });
+                }
             },
             tagClick(val) {
                 this.$store.commit('TOOGLECURRENTMENU', val);
