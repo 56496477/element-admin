@@ -3,4 +3,5 @@ export default {
     currentMenu: [],
     currentName: '',
     collapse: true,
+    currentPath: ''
 }
