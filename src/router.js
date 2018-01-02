@@ -2,7 +2,7 @@ import Main from './views/Main.vue'
 
 const mainRouter = [
     {
-        path: '/',
+        path: '/compontent',
         name: 'fniu',
         title: '组件',
         icon: 'el-icon-menu',

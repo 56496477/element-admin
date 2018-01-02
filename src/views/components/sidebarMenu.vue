@@ -1,5 +1,5 @@
 <template>
-    <el-menu :default-active="dd" :style="{width: collapse ? '200px' : '60px'}" class="el-menu-vertical-demo" @select="handleSelect" :collapse="!collapse" background-color="#464c5b" text-color="#9ea7b4" active-text-color="#fff">
+    <el-menu :default-active="index" class="el-menu-vertical-demo" :style="{width: collapse ? '200px' : '64px'}" @select="handleSelect" :collapse="!collapse" background-color="#464c5b" text-color="#9ea7b4" active-text-color="#fff">
         <template v-for="item in menuList">
             <el-menu-item :index="item.path" v-if="item.children.length <= 1">
                 <i :class="item.icon"></i>
@@ -20,7 +20,7 @@
     export default {
         data() {
             return {
-                dd:'/index'
+                index: 'index'
             }
         },
         props: {
@@ -43,7 +43,8 @@
         },
         watch: {
             '$route' (to, from) {
-                this.$store.commit('UPDATECURRENTMENU',to);
+                console.log(to)
+                this.$store.commit('GETPATHNAME',to.name);
             }
         },
     }

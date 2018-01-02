@@ -37,7 +37,6 @@ body {
     height: 100%;
     width: 100%;
     position: fixed;
-    transition: all 0.3s ease-in-out;
     padding-left: 200px;
 }
 
@@ -50,18 +49,23 @@ body {
     bottom: 0;
     z-index: 9999;
     overflow: initial;
-    transition: all 0.5s ease-in-out;
+    transition: all .3s ;
 }
-
+.el-menu--collapse{
+    width: 64px !important;
+}
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
+  }
 .n-logo {
     width: 200px;
-    height: 60px;
+    height: 64px;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.3s ease-in-out;
+    transition: all .3s ;
     .logo {
-        transition: all 0.3s ease-in-out;
         height: 45px;
         width: 160px;
         text-align: center;
@@ -75,7 +79,6 @@ body {
 }
 
 .el-menu {
-    transition: all 0.2s;
     border-right: 0;
 }
 .el-main{
@@ -107,4 +110,8 @@ body {
     width: 100px;
     height: 100px;
     padding: 5px;
+}
+
+.el-menu-item, .el-menu{
+    background-color:#495060 !important;
 }

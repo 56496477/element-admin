@@ -24,7 +24,12 @@ util.getRoutesInfo = () => {
             _s[item.name] = item.title;
         }
     })
+    console.log(_s)
     return _s;
+}
+
+util.getPathName = (name) => {
+    
 }
 
 export default util;

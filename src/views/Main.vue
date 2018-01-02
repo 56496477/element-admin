@@ -1,32 +1,32 @@
 <template>
     <el-container class="n-container">
-        <el-aside :width="collapse ? '200px' : '60px'">
-            <div class="n-logo" :style="{width: collapse ? '200px' : '60px'}">
+        <el-aside :width="collapse ? '200px' : '64px'">
+            <div class="n-logo" :style="{width: collapse ? '200px' : '64px'}">
                 <div class="logo" :style="{width: collapse ? '160px' : '45px'}"></div>
             </div>
             <sidebarMenu :menuList="menuList"></sidebarMenu>
         </el-aside>
-        <el-container class="n-main" :style="{paddingLeft: collapse ? '200px' : '60px'}">
+        <el-container class="n-main" :style="{paddingLeft: collapse ? '200px' : '64px'}">
             <el-header>
                 <div class="n-header">
                     <span @click="toggleClick" class="el-icon-won-n-menu"></span>
                     <div class="menu">
                         <el-breadcrumb separator="/">
                             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                            <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+                            <el-breadcrumb-item v-for="item in currentLink">活动管理</el-breadcrumb-item>
                         </el-breadcrumb>
                     </div>
                 </div>
             </el-header>
             <el-main>
-                <div class="n-active-menu">
-                    <el-tag size="medium" v-for="item in currentMenu" @close.stop="tagClose(item)" @click.native="tagClick(item)" :class="[currentName == item.name ? 'el-tag-active' : '']" :closable="item.name == 'index' ? false : true" color="#fff">{{item.title}}</el-tag>
+                <!-- <div class="n-active-menu">
+                    
                 </div>
                 <div class="active-div">
                     <router-view></router-view>
-                </div>
+                </div> -->
             </el-main>
-            <!-- <el-footer height="30px"></el-footer> -->
+            <el-footer height="30px"></el-footer>
         </el-container>
     </el-container>
 </template>
@@ -47,30 +47,13 @@
             collapse() {
                 return this.$store.state.collapse;
             },
-            currentMenu() {
-                return this.$store.state.currentMenu;
-            },
-            currentName() {
-                return this.$store.state.currentName;
+            currentLink() {
+                return this.$store.state.currentLink;
             }
         },
         methods: {
             toggleClick() {
                 this.$store.commit('UPDATECOLLAPSE');
-            },
-            tagClose(val) {
-                this.$store.commit('DELETECURRENTMENU', val.name);
-                if(this.$store.state.currentName == 'index'){
-                    this.$router.push({
-                    path: '/index'
-                });
-                }
-            },
-            tagClick(val) {
-                this.$store.commit('TOOGLECURRENTMENU', val);
-                this.$router.push({
-                    path: val.path
-                });
             }
         }
     };

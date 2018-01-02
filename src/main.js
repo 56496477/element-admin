@@ -35,6 +35,5 @@ new Vue({
     render: h => h(App),
     created() {
         this.$store.commit('UPDATEMENULIST');
-        this.$store.commit('SETCURRENTMENU');
     }
 })
